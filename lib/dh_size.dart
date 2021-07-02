@@ -11,15 +11,15 @@ class DHSize {
   double height;
   bool allowFontScaling;
 
-  static late  MediaQueryData _mediaQueryData;
-  static late double _screenWidth;
-  static late double _screenHeight;
-  static late double _pixelRatio;
-  static late double _statusBarHeight;
+  static   MediaQueryData? _mediaQueryData;
+  static  double? _screenWidth;
+  static  double? _screenHeight;
+  static  double _pixelRatio = 1;
+  static  double? _statusBarHeight;
 
-  static late double _bottomBarHeight;
+  static  double? _bottomBarHeight;
 
-  static late double _textScaleFactor;
+  static  double ?_textScaleFactor;
 
   DHSize({
     this.width = 375,
@@ -39,53 +39,53 @@ class DHSize {
     _screenWidth = mediaQuery.size.width;
     _screenHeight = mediaQuery.size.height;
     _statusBarHeight = mediaQuery.padding.top;
-    _bottomBarHeight = _mediaQueryData.padding.bottom;
+    _bottomBarHeight = _mediaQueryData!.padding.bottom;
     _textScaleFactor = mediaQuery.textScaleFactor;
   }
 
-  static MediaQueryData get mediaQueryData => _mediaQueryData;
+  static MediaQueryData get mediaQueryData => _mediaQueryData!;
 
   ///每个逻辑像素的字体像素数，字体的缩放比例
-  static double get textScaleFactory => _textScaleFactor;
+  static double get textScaleFactory => _textScaleFactor!;
 
   ///设备的像素密度
   static double get pixelRatio => _pixelRatio;
 
   ///当前设备宽度 dp
-  static double get screenWidth => _screenWidth;
+  static double get screenWidth => _screenWidth!;
 
   ///当前设备高度 dp
-  static double get screenHeight => _screenHeight;
+  static double get screenHeight => _screenHeight!;
 
   ///当前设备宽度 px
-  static double get screenWidthPx => _screenWidth * _pixelRatio;
+  static double get screenWidthPx => _screenWidth !* _pixelRatio;
 
   ///当前设备高度 px
-  static double get screenHeightPx => _screenHeight * _pixelRatio;
+  static double get screenHeightPx => _screenHeight !* _pixelRatio;
 
   ///状态栏高度 刘海屏会更高 dp
-  static double get statusBarHeight => _statusBarHeight;
+  static double get statusBarHeight => _statusBarHeight!;
 
   ///底部安全区距离 dp
-  static double get bottomBarHeight => _bottomBarHeight;
+  static double get bottomBarHeight => _bottomBarHeight!;
 
   ///状态栏高度 刘海屏会更高 px
-  static double get statusBarHeightPx => _statusBarHeight * _pixelRatio;
+  static double get statusBarHeightPx => _statusBarHeight !* _pixelRatio;
 
   ///底部安全区距离 px
-  static double get bottomBarHeightPx => _bottomBarHeight * _pixelRatio;
+  static double get bottomBarHeightPx => _bottomBarHeight !* _pixelRatio;
 
   ///根据屏幕宽度适配,实际的dp与设计稿px的比例
   static double get ratio => instance.scaleWidth;
 
   ///根据屏幕宽度适配,实际的dp与设计稿px的比例
-  get scaleWidth => _screenWidth / instance.width;
+  get scaleWidth => _screenWidth !/ instance.width;
 
   /// 根据设计稿的设备高度适配
   /// 当发现设计稿中的一屏显示的与当前样式效果不符合时,
   /// 或者形状有差异时,高度适配建议使用此方法
   /// 高度适配主要针对想根据设计稿的一屏展示一样的效果
-  get scaleHeight => _screenHeight / instance.height;
+  get scaleHeight => _screenHeight !/ instance.height;
 
   ///默认根据宽度适配
   static double dp(double width) => instance.setWidth(width);
@@ -108,6 +108,6 @@ class DHSize {
   double setSp(double fontSize) {
     return allowFontScaling
         ? setWidth(fontSize)
-        : setWidth(fontSize) / _textScaleFactor;
+        : setWidth(fontSize) / _textScaleFactor!;
   }
 }
